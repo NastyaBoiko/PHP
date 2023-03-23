@@ -20,7 +20,7 @@ class ExceptionLetter extends Exception
     }
 }
 
-class ExceptionMinus extends Exception 
+class ExceptionIntegerMinus extends Exception 
 {
     public $message;
 
@@ -40,7 +40,67 @@ class ExceptionMinus extends Exception
     }
 }
 
-class ExceptionType extends Exception 
+class ExceptionInteger extends Exception 
+{
+    public $message;
+
+    public function __construct($message)
+    {
+        parent::__construct($message);
+        $this->message = $message;
+    }
+
+    public function getMyMessage() 
+    {
+        return "<div style='color: #a80b83; 
+        font-weight: 600; 
+        background-color: #ed83d575; 
+        padding: 5px; 
+        margin: 15px 0'>" . $this->message . "</div>";
+    }
+}
+
+class ExceptionNumOfArgs extends Exception 
+{
+    public $message;
+
+    public function __construct($message)
+    {
+        parent::__construct($message);
+        $this->message = $message;
+    }
+
+    public function getMyMessage() 
+    {
+        return "<div style='color: #a80b83; 
+        font-weight: 600; 
+        background-color: #ed83d575; 
+        padding: 5px; 
+        margin: 15px 0'>" . $this->message . "</div>";
+    }
+}
+
+class ExceptionValuesZero extends Exception 
+{
+    public $message;
+
+    public function __construct($message)
+    {
+        parent::__construct($message);
+        $this->message = $message;
+    }
+
+    public function getMyMessage() 
+    {
+        return "<div style='color: #a80b83; 
+        font-weight: 600; 
+        background-color: #ed83d575; 
+        padding: 5px; 
+        margin: 15px 0'>" . $this->message . "</div>";
+    }
+}
+
+class ExceptionLinear extends Exception 
 {
     public $message;
 
@@ -66,25 +126,25 @@ class ExceptionType extends Exception
 function fact($a) {
     if (is_int($a)) {
         if ($a < 0) {
-            throw new ExceptionMinus('error value is less then 0!');
+            throw new ExceptionIntegerMinus('error value is less then 0!');
         } elseif ($a === 0) {
             $res = 1;
         } else {
             $res = $a * fact ($a - 1);
         }
     } else {
-        throw new ExceptionLetter('error value is not numeric!');
+        throw new ExceptionInteger('error value is not integer!');
     }
     return $res;
 }
     
 try {
-    // echo fact(5) . "<br>";
+    echo fact(5.6) . "<br>";
     // echo fact(-5) . "<br>";
     // echo fact("5") . "<br>";
-    // echo fact(0) . "<br>";
+    echo fact('a') . "<br>";
 
-} catch (ExceptionLetter | ExceptionMinus $e) {
+} catch (ExceptionIntegerMinus | ExceptionInteger $e) {
     echo $e->getMyMessage() . "Line of exception: " . $e->getLine() . "<br>";
 }
 
@@ -104,13 +164,13 @@ class Square
         $this->c = $mas[2];
     
             if (count($mas) > 3) {
-                throw new ExceptionType('Слишком много аргументов!');
+                throw new ExceptionNumOfArgs('Слишком много аргументов!');
             } else if (count($mas) < 3) {
-                throw new ExceptionType('Не хватает аргументов!');
+                throw new ExceptionNumOfArgs('Не хватает аргументов!');
             }
 
             if ($this->checkZero()){
-                throw new ExceptionType('Введены все 0!');
+                throw new ExceptionValuesZero('Введены все 0!');
             } else if ($this->check()) {
                 if ($this->a != 0) {
                     if($this->b == 0 && $this->c == 0) {
@@ -143,7 +203,7 @@ class Square
                 } else {
                     // x = -($this->c / $this->b)
                     // $res = `${x}`
-                    throw new ExceptionType('Введено не квадратное уравнение, а линейное!');
+                    throw new ExceptionLinear('Введено не квадратное уравнение, а линейное!');
                 }
                 return "Ответ: $res";
             } else {
@@ -163,8 +223,8 @@ class Square
 $sqrt = new Square();
 
 try {
-    echo $sqrt->sqrt([1, 0, -6.9]);
-} catch (ExceptionLetter | ExceptionMinus | ExceptionType $e) {
+    echo $sqrt->sqrt([1, 0, 'a',]);
+} catch (ExceptionLetter | ExceptionNumOfArgs | ExceptionValuesZero | ExceptionLinear $e) {
     echo $e->getMyMessage() . "Line of exception: " . $e->getLine() . "<br>";
 }
 
