@@ -72,9 +72,9 @@ class ExceptionNumOfArgs extends Exception
 
     public function getMyMessage() 
     {
-        return "<div style='color: #a80b83; 
+        return "<div style='color: #1d6c41; 
         font-weight: 600; 
-        background-color: #ed83d575; 
+        background-color: #91f1bc; 
         padding: 5px; 
         margin: 15px 0'>" . $this->message . "</div>";
     }
@@ -92,9 +92,9 @@ class ExceptionValuesZero extends Exception
 
     public function getMyMessage() 
     {
-        return "<div style='color: #a80b83; 
+        return "<div style='color: #138491; 
         font-weight: 600; 
-        background-color: #ed83d575; 
+        background-color: #9cdce3a6; 
         padding: 5px; 
         margin: 15px 0'>" . $this->message . "</div>";
     }
@@ -112,9 +112,9 @@ class ExceptionLinear extends Exception
 
     public function getMyMessage() 
     {
-        return "<div style='color: #a80b83; 
+        return "<div style='color: #6f8755; 
         font-weight: 600; 
-        background-color: #ed83d575; 
+        background-color: #c8f993; 
         padding: 5px; 
         margin: 15px 0'>" . $this->message . "</div>";
     }
@@ -139,10 +139,10 @@ function fact($a) {
 }
     
 try {
-    echo fact(5.6) . "<br>";
+    echo fact(5) . "<br>";
     // echo fact(-5) . "<br>";
     // echo fact("5") . "<br>";
-    echo fact('a') . "<br>";
+    echo fact(4) . "<br>";
 
 } catch (ExceptionIntegerMinus | ExceptionInteger $e) {
     echo $e->getMyMessage() . "Line of exception: " . $e->getLine() . "<br>";
